@@ -31,12 +31,12 @@ impl ReassemblerBuffer {
         match self.bitmap.iter().position(|&r| !r) {
             None => {
                 self.pending = 0;
-                &self.bitmap.clear();
+                let _ = &self.bitmap.clear();
                 self.buffer.drain(..).collect()
             }
             Some(pos) => {
                 self.pending -= &pos;
-                &self.bitmap.drain(..&pos);
+                let _ = &self.bitmap.drain(..&pos);
                 self.buffer.drain(..&pos).collect()
             }
         }
@@ -54,7 +54,7 @@ impl ReassemblerBuffer {
     }
 
     pub(crate) fn resize(&mut self, size: usize) -> () {
-        &self.buffer.push_str(&" ".repeat(size));
-        &self.bitmap.resize(size + &self.bitmap.len(), false);
+        let _ = &self.buffer.push_str(&" ".repeat(size));
+        let _ = &self.bitmap.resize(size + &self.bitmap.len(), false);
     }
 }
