@@ -1,8 +1,8 @@
 use std::ops::Add;
 
-const MOD: u64 = 1u64 << 32;
+const MOD: usize = 1usize << 32;
 
-struct Wrap32 {
+pub struct Wrap32 {
     raw_value: u32
 }
 
@@ -16,12 +16,12 @@ impl Add<u32> for Wrap32 {
 
 impl Wrap32 {
 
-    fn new(value: u32) -> Self {
+    pub fn new(value: u32) -> Self {
         Wrap32 {raw_value: value}
     }
 
-    fn unwrap(&self, zero_point: Wrap32, checkpoint: u64) -> u64 {
-        let abs1 = &self.raw_value as u64 + checkpoint/MOD * MOD - &zero_point.raw_value as u64;
+    pub fn unwrap(&self, zero_point: &Wrap32, checkpoint: usize) -> usize {
+        let abs1 = &self.raw_value as usize + checkpoint/MOD * MOD - &zero_point.raw_value as usize;
         if abs1  > checkpoint {
             if abs1 < MOD {
                 abs1
@@ -35,7 +35,7 @@ impl Wrap32 {
         }
     }
 
-    fn wrap(n: u64, zero_point: Wrap32) -> Wrap32 {
+    pub fn wrap(n: usize, zero_point: &Wrap32) -> Wrap32 {
         zero_point + n as u32
     }
 }

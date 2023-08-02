@@ -2,7 +2,7 @@ use crate::reassembler::ReassemblerBuffer;
 use crate::stream::Writer;
 use std::cmp::{max, min};
 
-struct Reassembler {
+pub struct Reassembler {
     write_index: usize,
     max_index: usize,
     buffer: ReassemblerBuffer,
@@ -23,7 +23,7 @@ impl Reassembler {
         self.buffer.bytes_pending()
     }
 
-    fn insert(
+    pub fn insert(
         &mut self,
         first_index: usize,
         data: String,
