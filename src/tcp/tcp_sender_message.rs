@@ -4,15 +4,16 @@ pub struct TCPSenderMessage {
     pub seqno: Wrap32,
     pub syn: bool,
     pub payload: String,
-    pub fin: bool
+    pub fin: bool,
 }
 
 impl TCPSenderMessage {
     fn new() -> Self {
-        TCPSenderMessage {seqno: Wrap32::new(0),
-        syn: false,
-        payload: String::from(""),
-        fin: false
+        TCPSenderMessage {
+            seqno: Wrap32::new(0),
+            syn: false,
+            payload: String::from(""),
+            fin: false,
         }
     }
 

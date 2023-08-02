@@ -1,6 +1,6 @@
+mod integer;
 mod reassembler;
 mod stream;
-mod integer;
 mod tcp;
 
 pub fn add(left: usize, right: usize) -> usize {
