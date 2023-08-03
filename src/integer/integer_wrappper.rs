@@ -20,9 +20,8 @@ impl Wrap32 {
         Wrap32 { raw_value: value }
     }
 
-    pub fn unwrap(&self, zero_point: &Wrap32, checkpoint: usize) -> usize {
-        let abs1 =
-            self.raw_value as usize + checkpoint / MOD * MOD - zero_point.raw_value as usize;
+    pub fn unwrap(&self, zero_point: &Wrap32, &checkpoint: &usize) -> usize {
+        let abs1 = self.raw_value as usize + checkpoint / MOD * MOD - zero_point.raw_value as usize;
         if abs1 > checkpoint {
             if abs1 < MOD {
                 abs1

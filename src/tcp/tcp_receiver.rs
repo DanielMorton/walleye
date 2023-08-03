@@ -25,7 +25,7 @@ impl TCPReceiver {
                 self.start = first_byte;
             }
             reassembler.insert(
-                first_byte.unwrap(&self.start, inbound_stream.bytes_pushed()),
+                first_byte.unwrap(&self.start, &inbound_stream.bytes_pushed()),
                 message.payload,
                 message.fin,
                 inbound_stream,

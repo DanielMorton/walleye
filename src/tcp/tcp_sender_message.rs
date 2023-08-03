@@ -9,7 +9,7 @@ pub struct TCPSenderMessage {
 }
 
 impl TCPSenderMessage {
-    pub fn sequence_length(&self) -> usize {
-        self.syn as usize + &self.payload.len() + self.fin as usize
+    pub fn sequence_length(&self) -> u16 {
+        self.syn as u16 + self.payload.len() as u16 + self.fin as u16
     }
 }
