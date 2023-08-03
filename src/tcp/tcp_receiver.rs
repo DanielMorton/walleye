@@ -17,7 +17,7 @@ impl TCPReceiver {
         message: TCPSenderMessage,
         reassembler: &mut Reassembler,
         inbound_stream: &impl Writer,
-    ) -> () {
+    ) {
         if message.syn || self.syn {
             let first_byte = message.seqno + message.syn as u32;
             if message.syn {

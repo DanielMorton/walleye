@@ -29,7 +29,7 @@ impl Reassembler {
         data: String,
         is_last_substring: bool,
         output: &impl Writer,
-    ) -> () {
+    ) {
         self.last_index_read |= is_last_substring;
         self.buffer.resize(output.available_capacity());
         let read_length = min(data.len(), output.available_capacity());
@@ -40,7 +40,7 @@ impl Reassembler {
         self.max_index = max(self.max_index, last_index)
     }
 
-    fn write_to_buffer(&mut self, first_index: &usize, read_length: &usize, data: &String) -> () {
+    fn write_to_buffer(&mut self, first_index: &usize, read_length: &usize, data: &String) {
         let data_offset = if first_index > &self.write_index {
             0
         } else {
@@ -59,7 +59,7 @@ impl Reassembler {
         }
     }
 
-    fn write_to_stream(&mut self, output: &mut impl Writer) -> () {
+    fn write_to_stream(&mut self, output: &mut impl Writer) {
         let bytes_to_write = self.buffer.pop();
         if !bytes_to_write.is_empty() {
             self.write_index += bytes_to_write.len();

@@ -25,17 +25,17 @@ impl ByteStream {
 }
 
 impl Writer for ByteStream {
-    fn push(&mut self, data: String) -> () {
+    fn push(&mut self, data: String) {
         let max_pos = min(data.len(), self.available_capacity());
         self.buffer += &data[..max_pos];
         self.total_bytes += max_pos;
     }
 
-    fn close(&mut self) -> () {
+    fn close(&mut self) {
         self.closed = true;
     }
 
-    fn set_error(&mut self) -> () {
+    fn set_error(&mut self) {
         self.error = true
     }
 

@@ -25,7 +25,7 @@ impl TCPSender {
         self.consecutive_retransmissions
     }
 
-    pub fn push(&mut self, outbound_stream: &mut impl Reader) -> () {
+    pub fn push(&mut self, outbound_stream: &mut impl Reader) {
         if !&self.fin_sent {
             let mut is_first_payload = self.seqno_absolute == 0;
             let mut stream_finished = outbound_stream.is_finished();
@@ -73,7 +73,7 @@ impl TCPSender {
         }
     }
 
-    pub fn receive(&mut self, msg: &TCPReceiverMessage) -> () {
+    pub fn receive(&mut self, msg: &TCPReceiverMessage) {
         self.receiver_window_size = msg.window_size;
         self.receiver_free_space = msg.window_size;
         match msg.ackno {
@@ -165,7 +165,7 @@ impl TCPSender {
             && self.timer.elapsed_time() > 0)
     }
 
-    fn piggyback(&mut self) -> () {
+    fn piggyback(&mut self) {
         match self.messages.back_mut() {
             None => {}
             Some(mut message) => {
@@ -184,7 +184,7 @@ impl TCPSender {
         }
     }
 
-    fn push_empty(&mut self, &is_first_payload: &bool, &is_last_payload: &bool) -> () {
+    fn push_empty(&mut self, &is_first_payload: &bool, &is_last_payload: &bool) {
         self.push_message(&is_first_payload, String::from(""), &is_last_payload)
     }
 
@@ -192,7 +192,7 @@ impl TCPSender {
         &mut self,
         &is_first_payload: &bool,
         outbound_stream: &mut impl Reader,
-    ) -> () {
+    ) {
         if self.seqnos_in_flight() > 0 {
         } else if is_first_payload {
             self.push_empty(&is_first_payload, &false)
@@ -205,12 +205,7 @@ impl TCPSender {
         }
     }
 
-    fn push_message(
-        &mut self,
-        &is_first_payload: &bool,
-        payload: String,
-        &is_last_payload: &bool,
-    ) -> () {
+    fn push_message(&mut self, &is_first_payload: &bool, payload: String, &is_last_payload: &bool) {
         let start = Wrap32::wrap(&self.seqno_absolute, &self.isn);
         let message = TCPSenderMessage {
             seqno: start,

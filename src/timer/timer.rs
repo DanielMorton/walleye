@@ -15,7 +15,7 @@ impl Timer {
         }
     }
 
-    pub fn double_rto(&mut self) -> () {
+    pub fn double_rto(&mut self) {
         self.rto *= 2;
         self.elapsed_time = 0
     }
@@ -37,19 +37,19 @@ impl Timer {
         self.is_running
     }
 
-    pub fn reset(&mut self) -> () {
+    pub fn reset(&mut self) {
         self.rto = self.initial_rto;
         self.elapsed_time = 0;
     }
 
-    pub fn start(&mut self) -> () {
+    pub fn start(&mut self) {
         if !self.is_running {
             self.is_running = true;
             self.reset()
         }
     }
 
-    pub fn stop(&mut self) -> () {
+    pub fn stop(&mut self) {
         self.is_running = false
     }
 }

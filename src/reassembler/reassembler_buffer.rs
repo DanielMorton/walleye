@@ -42,7 +42,7 @@ impl ReassemblerBuffer {
         }
     }
 
-    pub(crate) fn replace(&mut self, data: &str, buffer_offset: usize) -> () {
+    pub(crate) fn replace(&mut self, data: &str, buffer_offset: usize) {
         let max_offset = buffer_offset + data.len();
         self.buffer.replace_range(buffer_offset..max_offset, &data);
         for offset in buffer_offset..max_offset {
@@ -53,7 +53,7 @@ impl ReassemblerBuffer {
         }
     }
 
-    pub(crate) fn resize(&mut self, size: usize) -> () {
+    pub(crate) fn resize(&mut self, size: usize) {
         let _ = &self.buffer.push_str(&" ".repeat(size));
         let _ = &self.bitmap.resize(size + &self.bitmap.len(), false);
     }
