@@ -31,7 +31,7 @@ impl TCPReceiver {
                 inbound_stream,
             );
             self.ackno = Some(
-                Wrap32::wrap(inbound_stream.bytes_pushed(), &self.start)
+                Wrap32::wrap(&inbound_stream.bytes_pushed(), &self.start)
                     + inbound_stream.is_closed() as u32,
             )
         }

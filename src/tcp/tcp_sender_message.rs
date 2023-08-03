@@ -1,5 +1,6 @@
 use crate::integer::Wrap32;
 
+#[derive(Clone)]
 pub struct TCPSenderMessage {
     pub seqno: Wrap32,
     pub syn: bool,
@@ -8,16 +9,7 @@ pub struct TCPSenderMessage {
 }
 
 impl TCPSenderMessage {
-    fn new() -> Self {
-        TCPSenderMessage {
-            seqno: Wrap32::new(0),
-            syn: false,
-            payload: String::from(""),
-            fin: false,
-        }
-    }
-
-    fn sequence_length(&self) -> usize {
-        &self.syn as usize + &self.payload.len() + &self.fin as usize
+    pub fn sequence_length(&self) -> usize {
+        self.syn as usize + &self.payload.len() + self.fin as usize
     }
 }

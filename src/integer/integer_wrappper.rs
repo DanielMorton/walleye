@@ -2,6 +2,7 @@ use std::ops::Add;
 
 const MOD: usize = 1usize << 32;
 
+#[derive(Clone, Copy)]
 pub struct Wrap32 {
     raw_value: u32,
 }
@@ -21,7 +22,7 @@ impl Wrap32 {
 
     pub fn unwrap(&self, zero_point: &Wrap32, checkpoint: usize) -> usize {
         let abs1 =
-            &self.raw_value as usize + checkpoint / MOD * MOD - &zero_point.raw_value as usize;
+            self.raw_value as usize + checkpoint / MOD * MOD - zero_point.raw_value as usize;
         if abs1 > checkpoint {
             if abs1 < MOD {
                 abs1
@@ -43,7 +44,7 @@ impl Wrap32 {
         }
     }
 
-    pub fn wrap(n: usize, zero_point: &Wrap32) -> Wrap32 {
+    pub fn wrap(&n: &usize, &zero_point: &Wrap32) -> Wrap32 {
         zero_point + n as u32
     }
 }

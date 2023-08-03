@@ -2,6 +2,7 @@ mod integer;
 mod reassembler;
 mod stream;
 mod tcp;
+mod timer;
 
 pub fn add(left: usize, right: usize) -> usize {
     left + right
