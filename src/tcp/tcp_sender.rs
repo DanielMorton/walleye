@@ -205,7 +205,12 @@ impl TCPSender {
         }
     }
 
-    fn push_message(&mut self, &is_first_payload: &bool, payload: String, &is_last_payload: &bool) {
+    fn push_message(
+        &mut self,
+        &is_first_payload: &bool,
+        payload: String,
+        &is_last_payload: &bool,
+    ) {
         let start = Wrap32::wrap(&self.seqno_absolute, &self.isn);
         let message = TCPSenderMessage {
             seqno: start,
